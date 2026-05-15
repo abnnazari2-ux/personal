@@ -1,0 +1,245 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #06080b;
+  --card: #0c0f14;
+  --border: #1a2235;
+  --accent: #b8f53a;
+  --warning: #ff7b2c;
+  --danger: #ff3b3b;
+  --success: #2dd4bf;
+  --info: #38b6ff;
+  --text: #f0f4f8;
+  --muted: #6b7a99;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+}
+
+body {
+  background: var(--bg);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+/* Custom checkbox */
+.task-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.task-checkbox:checked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.task-checkbox:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #06080b;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.task-checkbox:hover {
+  border-color: var(--accent);
+}
+
+/* Set checkbox (small) */
+.set-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--card);
+  position: relative;
+}
+
+.set-checkbox.done {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #06080b;
+}
+
+/* Progress ring */
+.progress-ring-circle {
+  transition: stroke-dashoffset 1s ease;
+  transform-origin: center;
+  transform: rotate(-90deg);
+}
+
+/* Card */
+.health-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+/* Overdue pulse */
+@keyframes overduePulse {
+  0%, 100% { border-color: #ff7b2c; }
+  50% { border-color: #ff3b3b; }
+}
+
+.overdue-task {
+  animation: overduePulse 2s infinite;
+}
+
+/* Task complete animation */
+@keyframes taskComplete {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.03); }
+  60% { transform: scale(0.98); }
+  100% { transform: scale(1); }
+}
+
+.task-just-completed {
+  animation: taskComplete 0.4s ease;
+}
+
+/* Water glass fill animation */
+@keyframes fillGlass {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+/* Bottom nav safe area */
+.bottom-nav {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Pill / supplement icon */
+.pill-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  transition: all 0.2s;
+}
+
+.pill-icon.taken {
+  background: var(--accent);
+  color: #06080b;
+  border-color: var(--accent);
+}
+
+/* Streak fire */
+@keyframes fireFlicker {
+  0%, 100% { transform: scale(1) rotate(-2deg); }
+  50% { transform: scale(1.1) rotate(2deg); }
+}
+
+.streak-fire {
+  animation: fireFlicker 1.5s ease infinite;
+  display: inline-block;
+}
+
+/* Motivational quote */
+.quote-card {
+  background: linear-gradient(135deg, #0c1a35 0%, #0c0f14 100%);
+  border: 1px solid #1a3a60;
+  border-left: 3px solid var(--accent);
+}
+
+/* Mobile-friendly tap targets */
+button, .tap-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Category badge */
+.day-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Smooth transitions */
+.transition-smooth {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Input styling */
+input[type="number"], input[type="email"], input[type="text"], select {
+  background: #0c0f14;
+  border: 1px solid #1a2235;
+  color: #f0f4f8;
+  border-radius: 8px;
+  padding: 10px 14px;
+  width: 100%;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+input:focus, select:focus {
+  border-color: #b8f53a;
+}
+
+/* Range slider */
+input[type="range"] {
+  -webkit-appearance: none;
+  background: #1a2235;
+  height: 6px;
+  border-radius: 3px;
+  outline: none;
+  width: 100%;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #b8f53a;
+  cursor: pointer;
+}
